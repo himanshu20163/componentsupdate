@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
 //       <Counter />
-      {<Basic_class name="himanshu"/>}
+      <Basic_class name="himanshu"/>
     </div>
   );
 }
