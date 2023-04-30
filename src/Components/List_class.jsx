@@ -1,40 +1,54 @@
 import { Component } from "react";
-class List_class extends Component{
-    constructor(){
-        console.log("constructor called");
-        super();
-        this.state = {
-            data: [],
-        };
-    }
-    async componentDidMount(){
-       <h2>Component did mount</h2>
-       let api = 'https://fakestoreapi.com/products';
-       let res = await fetch(api);
-       let data = await res.json(res);
-       this.setState({data:data});
-    }
-    render(){
-        return(
+
+class List_class extends Component {
+  constructor() {
+    super();
+    console.log("constructor called");
+    this.state = {
+      data: {
+        name: "",
+        password: "",
+      },
+    };
+  }
+
+  get_name = (e) => {
+    let name = e.target.value;
+    this.setState((prevState) => ({ data: { ...prevState.data, name } }));
+  };
+
+  get_pass = (e) => {
+    let password = e.target.value;
+    this.setState((prevState) => ({
+      data: { ...prevState.data, password },
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <div>
+          <h4>Components mount update</h4>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            onChange={this.get_name}
+          />
+          <input
+            type="text"
+            placeholder="Enter your password"
+            onChange={this.get_pass}
+          />
+          {
             <div>
-                <div >
-                <h4>Components did mount</h4>
-                    <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                    
-                {this.state.data.map((e)=>{
-                    return (
-                       <div style={{width:"25%"}}>
-                     <h2>{e.id}</h2>
-                    <img src={e.image} height="100px" width="100px"/>
-                       </div> 
-                    )  
-                })}
-                    </div>
-                  
-                </div>
-                
+              <h3>Name : {this.state.data.name}</h3>
+              <h3>password : {this.state.data.password}</h3>
             </div>
-        )
-    }
+          }
+        </div>
+      </div>
+    );
+  }
 }
+
 export default List_class;
